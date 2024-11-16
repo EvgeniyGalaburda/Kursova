@@ -1,12 +1,72 @@
-main h1{
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100%;
+}
+
+body{
+    background: url('https://i.pinimg.com/originals/69/73/ca/6973ca4264cc93ef5acd5a13aae1112e.gif');
+    background-position: center;
+    background-repeat:repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 95vh;
+}
+
+.card{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.day-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px;
+    background: #ffffff24;
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+}
+
+header{
+    text-align: center;
+    color: white;
+}
+
+main{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    min-height: 85vh;
+}
+
+.today{
+    text-transform: capitalize;
     display: flex; 
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    color:#fff;
+}
+
+.todayTemp{
+    font-size: 72px;
+}
+
+.weather{
+    font-size: 24px;
+    display: flex;
     align-items: center;
 }
 
-html{
-    height: 100%;
+.left{
     display: flex;
-    justify-content: center;
     align-items: center;
+    font-weight: 400;
+    gap: 10px;
 }
