@@ -1,4 +1,4 @@
-import { W as WebPlugin } from "./index-HGT35Q3z.js";
+import { W as WebPlugin } from "./index-DkC35dLp.js";
 class GeolocationWeb extends WebPlugin {
   async getCurrentPosition(options) {
     return new Promise((resolve, reject) => {
