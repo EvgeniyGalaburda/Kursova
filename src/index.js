@@ -56,7 +56,7 @@ const getWeather = async() => {
                 ${mainWeather.map(day => (
                     `<div class="card">
                     <div class="left">
-                    <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png">
+                    <img class="icon" src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png">
                     <div class="day">
                     ${formatDate(day.dt_txt)}
                     </div>
@@ -71,7 +71,7 @@ const getWeather = async() => {
             `
             <div class="hour">
                 <div class="hour-temp">${hour.main.temp.toFixed(0)}°C</div>
-                <img src="http://openweathermap.org/img/wn/${hour.weather[0].icon}.png">
+                <img class="icon" src="http://openweathermap.org/img/wn/${hour.weather[0].icon}.png">
                 <div>${hour.wind.speed.toFixed(1)}km/h</div>
                 <div>${getFormattedTime(hour.dt_txt)}</div>
             </div>
