@@ -41,7 +41,6 @@ const getWeather = async() => {
         `;
         const mainWeather = data.list.filter((_,i) => i % 8 == 0);
         const dayWeather = data.list.filter((_, i) => i < 8);
-        console.log(mainWeather)
         document.querySelector('.today').innerHTML =`
         <div class="todayTemp">
             ${mainWeather[0].main.temp}°C
@@ -77,13 +76,19 @@ const getWeather = async() => {
             </div>
             `
         )).join('')}
+        `;
+
+        document.querySelector('.details').innerHTML = `
+        <div class="row"><h5><i class='bx bx-water'></i>Humidity</h5>${mainWeather[0].main.humidity}%</div>
+        <div class="row"><h5><i class='bx bxs-user-voice' ></i>Real feel</h5>${mainWeather[0].main.feels_like}°C</div>
+        <div class="row"><h5><i class='bx bxs-certification' ></i>Pressure</h5>${mainWeather[0].main.pressure}mbar</div>
+        <div class="row"><h5><i class='bx bxs-cloud' ></i>Clouds</h5>${mainWeather[0].clouds.all}%</div>
         `
     }
 }
 
 getWeather();
 
-console.log(new Date());
 
 
   

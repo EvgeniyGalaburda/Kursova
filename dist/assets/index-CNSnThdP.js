@@ -620,7 +620,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Geolocation = registerPlugin("Geolocation", {
-  web: () => __vitePreload(() => import("./web-BO8R-7dH.js"), true ? [] : void 0).then((m) => new m.GeolocationWeb())
+  web: () => __vitePreload(() => import("./web-CnYJiy_u.js"), true ? [] : void 0).then((m) => new m.GeolocationWeb())
 });
 const getCurrentPosition = async () => {
   const coordinates = await Geolocation.getCurrentPosition();
@@ -653,7 +653,6 @@ const getWeather = async () => {
         `;
     const mainWeather = data.list.filter((_, i) => i % 8 == 0);
     const dayWeather = data.list.filter((_, i) => i < 8);
-    console.log(mainWeather);
     document.querySelector(".today").innerHTML = `
         <div class="todayTemp">
             ${mainWeather[0].main.temp}°C
@@ -667,7 +666,7 @@ const getWeather = async () => {
             
                 ${mainWeather.map((day) => `<div class="card">
                     <div class="left">
-                    <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png">
+                    <img class="icon" src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png">
                     <div class="day">
                     ${formatDate(day.dt_txt)}
                     </div>
@@ -680,16 +679,21 @@ const getWeather = async () => {
         ${dayWeather.map((hour) => `
             <div class="hour">
                 <div class="hour-temp">${hour.main.temp.toFixed(0)}°C</div>
-                <img src="http://openweathermap.org/img/wn/${hour.weather[0].icon}.png">
+                <img class="icon" src="http://openweathermap.org/img/wn/${hour.weather[0].icon}.png">
                 <div>${hour.wind.speed.toFixed(1)}km/h</div>
                 <div>${getFormattedTime(hour.dt_txt)}</div>
             </div>
             `).join("")}
         `;
+    document.querySelector(".details").innerHTML = `
+        <div class="row"><h5><i class='bx bx-water'></i>Humidity</h5>${mainWeather[0].main.humidity}%</div>
+        <div class="row"><h5><i class='bx bxs-user-voice' ></i>Real feel</h5>${mainWeather[0].main.feels_like}°C</div>
+        <div class="row"><h5><i class='bx bxs-certification' ></i>Pressure</h5>${mainWeather[0].main.pressure}mbar</div>
+        <div class="row"><h5><i class='bx bxs-cloud' ></i>Clouds</h5>${mainWeather[0].clouds.all}%</div>
+        `;
   }
 };
 getWeather();
-console.log(/* @__PURE__ */ new Date());
 export {
   WebPlugin as W
 };
