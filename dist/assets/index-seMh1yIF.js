@@ -616,11 +616,11 @@ class CapacitorHttpPluginWeb extends WebPlugin {
     return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
   }
 }
-registerPlugin("CapacitorHttp", {
+const CapacitorHttp = registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Geolocation = registerPlugin("Geolocation", {
-  web: () => __vitePreload(() => import("./web-CnYJiy_u.js"), true ? [] : void 0).then((m) => new m.GeolocationWeb())
+  web: () => __vitePreload(() => import("./web-CWglcy3q.js"), true ? [] : void 0).then((m) => new m.GeolocationWeb())
 });
 const getCurrentPosition = async () => {
   const coordinates = await Geolocation.getCurrentPosition();
@@ -645,8 +645,9 @@ function getFormattedTime(dateString) {
 const getWeather = async () => {
   const coords = await getCurrentPosition();
   console.log(coords);
-  const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`);
-  const data = await res.json();
+  const res = await CapacitorHttp.get({ url: `https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric` });
+  console.log(res);
+  const data = res.data;
   if (data.cod == "200") {
     document.querySelector("header").innerHTML = `
         <h1>${data.city.name}<i class='bx bx-map'></i></h1>

@@ -1,4 +1,6 @@
 import { Geolocation } from '@capacitor/geolocation';
+import { CapacitorHttp } from '@capacitor/core';
+
 
 const getCurrentPosition = async () => {
   const coordinates = await Geolocation.getCurrentPosition();
@@ -33,8 +35,9 @@ const formatDate = (dateString) => {
 const getWeather = async() => {
     const coords = await getCurrentPosition();
     console.log(coords)
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`)
-    const data = await res.json();
+    const res = await CapacitorHttp.get({url:`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`});
+    console.log(res)
+    const data = res.data;
     if(data.cod == '200'){
         document.querySelector('header').innerHTML = `
         <h1>${data.city.name}<i class='bx bx-map'></i></h1>
