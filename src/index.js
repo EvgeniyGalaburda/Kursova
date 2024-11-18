@@ -32,15 +32,24 @@ const formatDate = (dateString) => {
     return `${hours}:${minutes}`;
   }
 
-const getWeather = async() => {
-    const coords = await getCurrentPosition();
-    console.log(coords)
-    const res = await CapacitorHttp.get({url:`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`});
+const getWeather = async(city = null) => {
+    let url;
+
+    if(city){
+      url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`
+    }
+    else{
+      const coords = await getCurrentPosition();
+      url = `https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=f2c34a6c833f212c4054fd3f08df324e&units=metric`;
+    }
+
+    
+    const res = await CapacitorHttp.get({url:url});
     console.log(res)
     const data = res.data;
     if(data.cod == '200'){
         document.querySelector('header').innerHTML = `
-        <h1>${data.city.name}<i class='bx bx-map'></i></h1>
+        <input class="city" type="text" value="${data.city.name}"><i class='bx bx-map'></i>
         `;
         const mainWeather = data.list.filter((_,i) => i % 8 == 0);
         const dayWeather = data.list.filter((_, i) => i < 8);
@@ -88,9 +97,14 @@ const getWeather = async() => {
         <div class="row"><h5><i class='bx bxs-cloud' ></i>Clouds</h5>${mainWeather[0].clouds.all}%</div>
         `
     }
+    document.querySelector('.bx-map').addEventListener('click', () => {
+      getWeather(document.querySelector('.city').value);
+    })
+    
 }
 
 getWeather();
+
 
 
 

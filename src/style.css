@@ -38,10 +38,20 @@ body{
 header{
     text-align: center;
     color: white;
+    font-size: 24px;
 }
 
-header h1{
+header input{
     font-weight: 400;
+    font-size: 24px;
+    width: 50%;
+    background: #dadada53;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    backdrop-filter: blur(10px);
 }
 
 main{
